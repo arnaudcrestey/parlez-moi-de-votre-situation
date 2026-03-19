@@ -195,12 +195,12 @@ export default function AnalysePage() {
 
         <div className="mt-8">
           <button
-            className="inline-flex min-h-[64px] items-center justify-center rounded-[22px] bg-mirror-terracotta px-8 text-base font-semibold text-white shadow-[0_16px_34px_rgba(168,93,61,0.24)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(168,93,61,0.30)]"
-            type="button"
-            onClick={handleStartAnalysis}
-          >
-            Recevoir mon éclairage
-          </button>
+  className="inline-flex min-h-[64px] items-center justify-center rounded-[22px] bg-mirror-terracotta px-8 text-base font-semibold text-white shadow-[0_16px_34px_rgba(168,93,61,0.24)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(168,93,61,0.30)]"
+  type="button"
+  onClick={handleStartAnalysis}
+>
+  Voir ce qui se révèle en vous
+</button>
         </div>
       </section>
     </main>
