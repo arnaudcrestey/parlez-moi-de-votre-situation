@@ -3,7 +3,7 @@ import Link from 'next/link';
 const benefits = [
   'Mettre des mots sur le flou',
   'Distinguer peur et intuition',
-  'Recevoir un premier axe de lecture'
+  'Recevoir un premier éclairage'
 ];
 
 export default function StartPage() {
@@ -29,11 +29,11 @@ export default function StartPage() {
 
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
               <Link className="mirror-button w-full sm:w-auto" href="/analyse">
-                Recevoir mon premier éclairage
+                Commencer
               </Link>
 
               <p className="text-sm leading-6 text-mirror-muted">
-                Sans questionnaire. Sans surinterprétation. Juste un premier éclairage sensible et structuré.
+                Un parcours simple, calme et structuré pour clarifier ce que vous sentez déjà.
               </p>
             </div>
           </div>
@@ -54,25 +54,18 @@ export default function StartPage() {
                     </p>
                   </div>
 
-                  <div className="grid gap-4 sm:grid-cols-3">
+                  <div className="grid gap-4 sm:grid-cols-2">
                     <div className="rounded-[24px] border border-mirror-border bg-[rgba(255,250,244,0.9)] p-5">
                       <p className="text-sm text-mirror-muted">Écriture libre</p>
-                      <p className="mt-2 text-lg font-medium leading-8 text-mirror-text">
+                      <p className="mt-2 text-base font-medium leading-7 text-mirror-text">
                         Aucune série de questions. Vous partez simplement de votre vécu.
                       </p>
                     </div>
 
                     <div className="rounded-[24px] border border-mirror-border bg-[rgba(255,250,244,0.82)] p-5">
-                      <p className="text-sm text-mirror-muted">Lecture structurée</p>
-                      <p className="mt-2 text-lg font-medium leading-8 text-mirror-text">
-                        Nous repérons les tensions, les hésitations et les élans qui se dessinent.
-                      </p>
-                    </div>
-
-                    <div className="rounded-[24px] border border-mirror-border bg-[rgba(255,250,244,0.76)] p-5">
-                      <p className="text-sm text-mirror-muted">Premier éclairage</p>
-                      <p className="mt-2 text-lg font-medium leading-8 text-mirror-text">
-                        Vous recevez une restitution claire, sensible et directement exploitable.
+                      <p className="text-sm text-mirror-muted">Lecture sensible</p>
+                      <p className="mt-2 text-base font-medium leading-7 text-mirror-text">
+                        Une lecture claire pour faire émerger tensions, hésitations et premiers élans.
                       </p>
                     </div>
                   </div>
