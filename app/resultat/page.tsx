@@ -31,16 +31,24 @@ export default function ResultatPage() {
     if (storedAnalysis) {
       setAnalysis(JSON.parse(storedAnalysis) as AnalysisResult);
     }
+
+    window.localStorage.removeItem('miroir-intuition:situation');
+    window.localStorage.removeItem('miroir-intuition:analysis');
   }, []);
 
   if (!analysis || !situation) {
     return (
       <main className="flex min-h-screen items-center px-5 py-8 sm:px-8 lg:px-10">
         <section className="mx-auto w-full max-w-2xl mirror-shell p-8 text-center sm:p-12">
-          <p className="text-xs uppercase tracking-[0.18em] text-mirror-copper">Aucune analyse disponible</p>
-          <h1 className="mt-4 text-4xl font-semibold text-mirror-ink">Recommençons depuis le début.</h1>
+          <p className="text-xs uppercase tracking-[0.18em] text-mirror-copper">
+            Aucune analyse disponible
+          </p>
+          <h1 className="mt-4 text-4xl font-semibold text-mirror-ink">
+            Recommençons depuis le début.
+          </h1>
           <p className="mt-4 text-base leading-7 text-mirror-muted">
-            Nous n’avons pas retrouvé votre situation ou votre éclairage. Vous pouvez relancer le parcours en quelques instants.
+            Nous n’avons pas retrouvé votre situation ou votre éclairage. Vous pouvez relancer le
+            parcours en quelques instants.
           </p>
           <div className="mt-8">
             <Link className="mirror-button" href="/start">
@@ -58,16 +66,21 @@ export default function ResultatPage() {
         <section className="mirror-shell p-8 sm:p-10 lg:p-12">
           <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-12">
             <div>
-              <p className="text-xs uppercase tracking-[0.18em] text-mirror-copper">Votre lecture</p>
+              <p className="text-xs uppercase tracking-[0.18em] text-mirror-copper">
+                Votre lecture
+              </p>
               <h1 className="mt-4 text-4xl font-semibold leading-tight text-mirror-ink sm:text-5xl">
                 Voici votre premier éclairage
               </h1>
               <p className="mt-5 max-w-xl text-base leading-7 text-mirror-muted">
-                Une lecture sensible et structurée de ce que vous avez partagé, pour vous aider à distinguer le bruit intérieur de ce qui cherche réellement à émerger.
+                Une lecture sensible et structurée de ce que vous avez partagé, pour vous aider à
+                distinguer le bruit intérieur de ce qui cherche réellement à émerger.
               </p>
 
               <div className="mt-8 rounded-[28px] border border-mirror-border bg-[rgba(255,250,244,0.9)] p-6">
-                <p className="text-xs uppercase tracking-[0.18em] text-mirror-copper">Votre situation</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-mirror-copper">
+                  Votre situation
+                </p>
                 <p className="mt-4 text-base leading-8 text-mirror-brown">{situation}</p>
               </div>
             </div>
@@ -80,8 +93,12 @@ export default function ResultatPage() {
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.18em] text-mirror-copper">0{index + 1}</p>
-                      <h2 className="mt-3 text-2xl font-semibold leading-tight text-mirror-ink">{title}</h2>
+                      <p className="text-xs uppercase tracking-[0.18em] text-mirror-copper">
+                        0{index + 1}
+                      </p>
+                      <h2 className="mt-3 text-2xl font-semibold leading-tight text-mirror-ink">
+                        {title}
+                      </h2>
                     </div>
                     <div className="mt-1 h-12 w-px bg-[linear-gradient(180deg,rgba(184,111,77,0.45),transparent)]" />
                   </div>
