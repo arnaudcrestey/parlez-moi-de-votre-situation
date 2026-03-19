@@ -28,8 +28,11 @@ export default function StartPage() {
             </div>
 
             <div className="pt-2">
-              <Link className="mirror-button w-full sm:w-auto" href="/analyse">
-                Commencer
+              <Link
+                href="/analyse"
+                className="inline-flex min-h-[68px] items-center justify-center rounded-[22px] bg-mirror-terracotta px-10 text-lg font-semibold text-white shadow-[0_16px_34px_rgba(168,93,61,0.24)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(168,93,61,0.30)]"
+              >
+                Décrire ma situation
               </Link>
             </div>
           </div>
