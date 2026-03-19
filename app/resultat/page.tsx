@@ -55,14 +55,14 @@ export default function ResultatPage() {
     if (!analysis) return null;
 
     return {
-      summary: shortenText(analysis.summary, 260),
-      fear: shortenText(analysis.fear, 220),
-      intuition: shortenText(analysis.intuition, 220),
-      nextStep: shortenText(analysis.nextStep, 180)
+      summary: shortenText(analysis.summary, 360),
+      fear: shortenText(analysis.fear, 260),
+      intuition: shortenText(analysis.intuition, 260),
+      nextStep: shortenText(analysis.nextStep, 220)
     };
   }, [analysis]);
 
-  const shortSituation = useMemo(() => shortenText(situation, 340), [situation]);
+  const shortSituation = useMemo(() => shortenText(situation, 520), [situation]);
 
   if (!analysis || !situation || !teaserAnalysis) {
     return (
@@ -96,17 +96,17 @@ export default function ResultatPage() {
 
   return (
     <main className="px-4 py-5 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 sm:gap-8 lg:gap-10">
+      <div className="mx-auto flex max-w-7xl flex-col gap-6 sm:gap-8">
         <section className="mirror-shell p-5 sm:p-8 lg:p-10">
-          <div className="grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:gap-8">
-            <div className="space-y-5">
+          <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr] lg:gap-8">
+            <div className="space-y-6">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.16em] text-mirror-copper sm:text-xs sm:tracking-[0.18em]">
                   Votre lecture
                 </p>
 
                 <h1 className="mt-3 text-[2rem] font-semibold leading-[0.96] text-mirror-ink sm:text-[2.5rem] lg:text-[3.25rem]">
-                  Voici votre premier éclairage
+                  Voici un début d'éclairage
                 </h1>
 
                 <p className="mt-4 max-w-xl text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
@@ -114,11 +114,11 @@ export default function ResultatPage() {
                 </p>
               </div>
 
-              <div className="rounded-[22px] border border-mirror-border bg-[rgba(255,250,244,0.9)] p-5 sm:rounded-[24px] sm:p-6 lg:rounded-[28px]">
+              <div className="rounded-[22px] border border-mirror-border bg-[rgba(255,250,244,0.92)] p-5 sm:rounded-[24px] sm:p-6 lg:rounded-[28px] lg:p-7">
                 <p className="text-[10px] uppercase tracking-[0.16em] text-mirror-copper sm:text-xs sm:tracking-[0.18em]">
                   Votre situation
                 </p>
-                <p className="mt-4 text-[15px] leading-7 text-mirror-brown sm:text-base sm:leading-8">
+                <p className="mt-4 text-[15px] leading-7 text-mirror-brown sm:text-base sm:leading-8 lg:text-[1.02rem]">
                   {shortSituation}
                 </p>
               </div>
@@ -128,14 +128,14 @@ export default function ResultatPage() {
               {sections.map(({ key, title }, index) => (
                 <article
                   key={key}
-                  className="rounded-[22px] border border-mirror-border bg-[rgba(255,250,244,0.88)] p-5 shadow-soft sm:rounded-[24px] sm:p-6 lg:rounded-[28px]"
+                  className="rounded-[22px] border border-mirror-border bg-[rgba(255,250,244,0.9)] p-5 shadow-soft sm:rounded-[24px] sm:p-6 lg:rounded-[28px] lg:p-7"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-[10px] uppercase tracking-[0.16em] text-mirror-copper sm:text-xs sm:tracking-[0.18em]">
                         0{index + 1}
                       </p>
-                      <h2 className="mt-3 text-[1.35rem] font-semibold leading-tight text-mirror-ink sm:text-[1.55rem] lg:text-2xl">
+                      <h2 className="mt-3 text-[1.3rem] font-semibold leading-tight text-mirror-ink sm:text-[1.55rem] lg:text-[1.8rem]">
                         {title}
                       </h2>
                     </div>
@@ -157,13 +157,13 @@ export default function ResultatPage() {
               Par e-mail
             </p>
 
-            <h2 className="mt-3 text-[1.9rem] font-semibold leading-tight text-mirror-ink sm:text-[2.2rem]">
-              Recevoir ma lecture complète par e-mail
+            <h2 className="mt-3 text-[1.9rem] font-semibold leading-tight text-mirror-ink sm:text-[2.2rem] lg:text-[2.5rem]">
+              Recevoir la lecture complète
             </h2>
 
             <p className="mt-4 text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-              Cet aperçu révèle déjà une partie de ce qui se joue. Recevez la lecture complète,
-              plus nuancée, plus approfondie et plus personnelle, directement par e-mail.
+              Cet aperçu révèle déjà une partie de ce qui se joue. Recevez par e-mail une lecture plus
+              approfondie, plus nuancée et plus personnelle de votre situation.
             </p>
           </div>
 
