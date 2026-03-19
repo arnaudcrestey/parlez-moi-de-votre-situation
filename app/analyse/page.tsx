@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import type { ChangeEvent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { AnalysisResult } from '@/lib/mirror-analysis';
@@ -14,24 +14,24 @@ const steps = [
 
 export default function AnalysePage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const mode = searchParams.get('mode');
-  const initialSituation = searchParams.get('situation') ?? '';
 
-  const [situation, setSituation] = useState(initialSituation);
+  const [situation, setSituation] = useState('');
   const [error, setError] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const savedSituation = window.localStorage.getItem('miroir-intuition:situation');
-    if (!initialSituation && savedSituation) {
+
+    if (savedSituation) {
       setSituation(savedSituation);
     }
-  }, [initialSituation]);
+
+    setIsReady(true);
+  }, []);
 
   const characterCount = useMemo(() => situation.trim().length, [situation]);
-  const showForm = mode === 'input' || !initialSituation;
 
   useEffect(() => {
     if (!loading) {
@@ -39,7 +39,7 @@ export default function AnalysePage() {
     }
 
     const interval = window.setInterval(() => {
-      setCurrentStep((value: number) => {
+      setCurrentStep((value) => {
         if (value >= steps.length - 1) {
           return value;
         }
@@ -88,11 +88,9 @@ export default function AnalysePage() {
     }
   }, [router, situation]);
 
-  useEffect(() => {
-    if (!showForm && initialSituation && !loading) {
-      void handleStartAnalysis();
-    }
-  }, [handleStartAnalysis, initialSituation, loading, showForm]);
+  if (!isReady) {
+    return null;
+  }
 
   if (loading) {
     return (
@@ -117,6 +115,7 @@ export default function AnalysePage() {
             <div className="grid gap-4">
               {steps.map((step, index) => {
                 const active = index <= currentStep;
+
                 return (
                   <div
                     key={step}
@@ -128,10 +127,14 @@ export default function AnalysePage() {
                   >
                     <div
                       className={`h-3 w-3 rounded-full transition-all duration-500 ${
-                        active ? 'bg-mirror-copper shadow-[0_0_0_6px_rgba(184,111,77,0.12)]' : 'bg-mirror-sand'
+                        active
+                          ? 'bg-mirror-copper shadow-[0_0_0_6px_rgba(184,111,77,0.12)]'
+                          : 'bg-mirror-sand'
                       }`}
                     />
-                    <p className={`text-base ${active ? 'text-mirror-text' : 'text-mirror-muted'}`}>{step}</p>
+                    <p className={`text-base ${active ? 'text-mirror-text' : 'text-mirror-muted'}`}>
+                      {step}
+                    </p>
                   </div>
                 );
               })}
@@ -155,6 +158,7 @@ export default function AnalysePage() {
               Quelques lignes suffisent. Écrivez simplement ce que vous vivez, ce qui vous trouble ou ce qui vous appelle.
             </p>
           </div>
+
           <Link
             href="/start"
             className="rounded-2xl border border-mirror-border px-4 py-3 text-sm font-medium text-mirror-muted transition hover:bg-[rgba(255,250,244,0.7)] hover:text-mirror-text"
@@ -167,6 +171,7 @@ export default function AnalysePage() {
           <label className="mirror-label" htmlFor="situation">
             Votre texte
           </label>
+
           <textarea
             id="situation"
             className="mirror-input min-h-[240px] resize-none leading-7"
@@ -174,10 +179,14 @@ export default function AnalysePage() {
             onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setSituation(event.target.value)}
             placeholder="Exemple : Je sens qu’un changement est nécessaire, mais je n’arrive pas à savoir si c’est une intuition profonde ou simplement la peur de continuer comme avant..."
           />
+
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-mirror-muted">Minimum 40 caractères pour un éclairage plus précis.</p>
+            <p className="text-sm text-mirror-muted">
+              Minimum 40 caractères pour un éclairage plus précis.
+            </p>
             <p className="text-sm text-mirror-muted">{characterCount} caractères</p>
           </div>
+
           {error ? <p className="text-sm text-[#9b5a42]">{error}</p> : null}
         </div>
 
