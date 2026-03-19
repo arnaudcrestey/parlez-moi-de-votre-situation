@@ -78,12 +78,11 @@ export default function ResultatPage() {
                 </p>
 
                 <h1 className="mt-3 text-[2rem] font-semibold leading-[0.96] text-mirror-ink sm:text-[2.5rem] lg:text-[3.25rem]">
-                  Voici ce qui se révèle en vous
+                  Voici votre premier éclairage
                 </h1>
 
                 <p className="mt-4 max-w-xl text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-                  Une lecture sensible et structurée de ce que vous avez partagé, pour vous aider à
-                  distinguer le bruit intérieur de ce qui cherche réellement à émerger.
+                  Une mise en lumière douce et structurée de votre situation, pour vous aider à voir plus clair dans ce qui se révèle en vous.
                 </p>
               </div>
 
