@@ -153,9 +153,7 @@ export default function ResultatPage() {
 
         <section className="mirror-shell p-5 sm:p-8 lg:p-10">
           <div className="max-w-3xl">
-            <p className="text-[10px] uppercase tracking-[0.16em] text-mirror-copper sm:text-xs sm:tracking-[0.18em]">
-              Par e-mail
-            </p>
+            
 
             <h2 className="mt-3 text-[1.9rem] font-semibold leading-tight text-mirror-ink sm:text-[2.2rem] lg:text-[2.5rem]">
               Recevoir la lecture complète
