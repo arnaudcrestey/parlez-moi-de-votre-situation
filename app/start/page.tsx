@@ -28,19 +28,19 @@ export default function StartPage() {
             </div>
 
             <div className="pt-2">
-  <Link
-    className="inline-flex min-h-[58px] items-center justify-center rounded-[20px] bg-mirror-terracotta px-8 text-base font-semibold text-white shadow-[0_14px_30px_rgba(168,93,61,0.22)] transition hover:translate-y-[-1px] hover:shadow-[0_18px_34px_rgba(168,93,61,0.28)]"
-    href="/analyse"
-  >
-    Commencer
-  </Link>
-</div>
+              <Link className="mirror-button w-full sm:w-auto" href="/analyse">
+                Commencer
+              </Link>
+            </div>
+          </div>
 
           <div className="animate-reveal [animation-delay:120ms]">
             <div className="mirror-shell min-h-[440px] p-7 sm:p-9">
               <div className="flex h-full flex-col justify-between gap-8 rounded-[28px] border border-[rgba(90,60,40,0.08)] bg-[linear-gradient(180deg,rgba(255,250,244,0.88),rgba(255,246,238,0.58))] p-6 sm:p-8">
                 <div className="space-y-4">
-                  <p className="text-xs uppercase tracking-[0.18em] text-mirror-copper">Miroir d’Intuition</p>
+                  <p className="text-xs uppercase tracking-[0.18em] text-mirror-copper">
+                    Miroir d’Intuition
+                  </p>
                   <div className="h-px w-full bg-[linear-gradient(90deg,rgba(184,111,77,0.6),rgba(220,199,174,0.2),transparent)]" />
                 </div>
 
@@ -48,7 +48,8 @@ export default function StartPage() {
                   <div className="rounded-[26px] border border-[rgba(90,60,40,0.1)] bg-[rgba(246,239,231,0.85)] p-6">
                     <p className="text-sm uppercase tracking-[0.16em] text-mirror-copper">Présence</p>
                     <p className="mt-3 text-2xl font-medium leading-9 text-mirror-brown">
-                      Un espace calme pour déposer ce que vous vivez et laisser émerger un premier axe de clarté.
+                      Un espace calme pour déposer ce que vous vivez et laisser émerger un premier axe de
+                      clarté.
                     </p>
                   </div>
 
