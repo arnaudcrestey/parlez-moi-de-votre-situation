@@ -54,7 +54,7 @@ export default function AnalysePage() {
     const trimmed = situation.trim();
 
     if (trimmed.length < 40) {
-      setError('Quelques lignes supplémentaires aideront à vous offrir un éclairage plus juste.');
+      setError('Ajoutez quelques lignes pour obtenir un éclairage plus juste.');
       return;
     }
 
@@ -97,9 +97,11 @@ export default function AnalysePage() {
       <main className="flex min-h-screen items-center px-5 py-8 sm:px-8 lg:px-10">
         <section className="mx-auto w-full max-w-3xl mirror-shell p-8 sm:p-12">
           <p className="text-xs uppercase tracking-[0.18em] text-mirror-copper">Analyse en cours</p>
+
           <h1 className="mt-4 text-4xl font-semibold leading-tight text-mirror-ink sm:text-5xl">
             Nous préparons votre premier éclairage.
           </h1>
+
           <p className="mt-5 max-w-2xl text-base leading-7 text-mirror-muted">
             Prenez une respiration. L’analyse se structure doucement à partir de ce que vous avez confié.
           </p>
@@ -147,51 +149,56 @@ export default function AnalysePage() {
 
   return (
     <main className="flex min-h-screen items-center px-5 py-8 sm:px-8 lg:px-10">
-      <section className="mx-auto w-full max-w-3xl mirror-shell p-8 sm:p-12">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
+      <section className="mx-auto w-full max-w-4xl mirror-shell p-8 sm:p-12">
+        <div className="flex flex-wrap items-start justify-between gap-6">
+          <div className="max-w-3xl">
             <p className="text-xs uppercase tracking-[0.18em] text-mirror-copper">Miroir d’Intuition</p>
-            <h1 className="mt-4 text-4xl font-semibold leading-tight text-mirror-ink sm:text-5xl">
+
+            <h1 className="mt-4 text-4xl font-semibold leading-[1.02] text-mirror-ink sm:text-5xl lg:text-[4.1rem]">
               Décrivez votre situation du moment
             </h1>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-mirror-muted">
-              Quelques lignes suffisent. Écrivez simplement ce que vous vivez, ce qui vous trouble ou ce qui vous appelle.
+
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-mirror-muted">
+              Écrivez librement ce que vous vivez, ce qui vous trouble ou ce qui vous appelle. Il ne s’agit pas de bien
+              écrire, mais de déposer ce qui est là.
             </p>
           </div>
 
           <Link
             href="/start"
-            className="rounded-2xl border border-mirror-border px-4 py-3 text-sm font-medium text-mirror-muted transition hover:bg-[rgba(255,250,244,0.7)] hover:text-mirror-text"
+            className="rounded-[18px] border border-mirror-border px-5 py-3 text-sm font-medium text-mirror-muted transition hover:bg-[rgba(255,250,244,0.7)] hover:text-mirror-text"
           >
             Retour
           </Link>
         </div>
 
         <div className="mt-10 grid gap-4">
-          <label className="mirror-label" htmlFor="situation">
+          <label className="text-base font-medium text-mirror-text" htmlFor="situation">
             Votre texte
           </label>
 
           <textarea
             id="situation"
-            className="mirror-input min-h-[240px] resize-none leading-7"
+            className="min-h-[250px] rounded-[28px] border border-[rgba(184,111,77,0.22)] bg-[rgba(255,252,248,0.78)] px-6 py-5 text-lg leading-8 text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.38)] focus:bg-[rgba(255,252,248,0.95)] focus:shadow-[0_0_0_5px_rgba(184,111,77,0.08)]"
             value={situation}
             onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setSituation(event.target.value)}
             placeholder="Exemple : Je sens qu’un changement est nécessaire, mais je n’arrive pas à savoir si c’est une intuition profonde ou simplement la peur de continuer comme avant..."
           />
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-mirror-muted">
-              Minimum 40 caractères pour un éclairage plus précis.
-            </p>
-            <p className="text-sm text-mirror-muted">{characterCount} caractères</p>
+          <div className="flex flex-col gap-3 text-sm text-mirror-muted sm:flex-row sm:items-center sm:justify-between">
+            <p>Minimum 40 caractères pour un éclairage plus précis.</p>
+            <p>{characterCount} caractères</p>
           </div>
 
           {error ? <p className="text-sm text-[#9b5a42]">{error}</p> : null}
         </div>
 
         <div className="mt-8">
-          <button className="mirror-button w-full sm:w-auto" type="button" onClick={handleStartAnalysis}>
+          <button
+            className="inline-flex min-h-[64px] items-center justify-center rounded-[22px] bg-mirror-terracotta px-8 text-base font-semibold text-white shadow-[0_16px_34px_rgba(168,93,61,0.24)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(168,93,61,0.30)]"
+            type="button"
+            onClick={handleStartAnalysis}
+          >
             Recevoir mon éclairage
           </button>
         </div>
