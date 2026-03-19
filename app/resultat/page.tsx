@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { LeadForm } from '@/components/lead-form';
 import type { AnalysisResult } from '@/lib/mirror-analysis';
 
@@ -17,6 +17,21 @@ const sections: Array<{ key: keyof AnalysisResult; title: string }> = [
   },
   { key: 'nextStep', title: 'La piste douce à explorer maintenant' }
 ];
+
+function shortenText(text: string, maxLength: number) {
+  if (!text) return '';
+  const clean = text.trim();
+  if (clean.length <= maxLength) return clean;
+
+  const sliced = clean.slice(0, maxLength);
+  const lastSpace = sliced.lastIndexOf(' ');
+
+  if (lastSpace > 0) {
+    return `${sliced.slice(0, lastSpace)}…`;
+  }
+
+  return `${sliced}…`;
+}
 
 export default function ResultatPage() {
   const [situation, setSituation] = useState('');
@@ -36,7 +51,20 @@ export default function ResultatPage() {
     window.localStorage.removeItem('miroir-intuition:analysis');
   }, []);
 
-  if (!analysis || !situation) {
+  const teaserAnalysis = useMemo(() => {
+    if (!analysis) return null;
+
+    return {
+      summary: shortenText(analysis.summary, 260),
+      fear: shortenText(analysis.fear, 220),
+      intuition: shortenText(analysis.intuition, 220),
+      nextStep: shortenText(analysis.nextStep, 180)
+    };
+  }, [analysis]);
+
+  const shortSituation = useMemo(() => shortenText(situation, 340), [situation]);
+
+  if (!analysis || !situation || !teaserAnalysis) {
     return (
       <main className="flex min-h-screen items-center px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         <section className="mx-auto w-full max-w-2xl mirror-shell p-6 text-center sm:p-10">
@@ -82,7 +110,7 @@ export default function ResultatPage() {
                 </h1>
 
                 <p className="mt-4 max-w-xl text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-                  Une mise en lumière douce et structurée de votre situation, pour vous aider à voir plus clair dans ce qui se révèle en vous.
+                  Une mise en lumière douce et structurée de votre situation, pour commencer à vous aider à y voir plus clair 
                 </p>
               </div>
 
@@ -91,7 +119,7 @@ export default function ResultatPage() {
                   Votre situation
                 </p>
                 <p className="mt-4 text-[15px] leading-7 text-mirror-brown sm:text-base sm:leading-8">
-                  {situation}
+                  {shortSituation}
                 </p>
               </div>
             </div>
@@ -115,7 +143,7 @@ export default function ResultatPage() {
                   </div>
 
                   <p className="mt-4 text-[15px] leading-7 text-mirror-muted sm:mt-5 sm:text-base sm:leading-8">
-                    {analysis[key]}
+                    {teaserAnalysis[key]}
                   </p>
                 </article>
               ))}
@@ -123,7 +151,26 @@ export default function ResultatPage() {
           </div>
         </section>
 
-        <LeadForm situation={situation} analysis={analysis} />
+        <section className="mirror-shell p-5 sm:p-8 lg:p-10">
+          <div className="max-w-3xl">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-mirror-copper sm:text-xs sm:tracking-[0.18em]">
+              Par e-mail
+            </p>
+
+            <h2 className="mt-3 text-[1.9rem] font-semibold leading-tight text-mirror-ink sm:text-[2.2rem]">
+              Recevoir ma lecture complète par e-mail
+            </h2>
+
+            <p className="mt-4 text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
+              Cet aperçu révèle déjà une partie de ce qui se joue. Recevez la lecture complète,
+              plus nuancée, plus approfondie et plus personnelle, directement par e-mail.
+            </p>
+          </div>
+
+          <div className="mt-6">
+            <LeadForm situation={situation} analysis={analysis} />
+          </div>
+        </section>
       </div>
     </main>
   );
