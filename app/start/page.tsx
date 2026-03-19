@@ -11,21 +11,21 @@ export default function StartPage() {
     <main className="relative isolate min-h-screen px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
       <div className="mx-auto flex min-h-[calc(100vh-2.5rem)] max-w-6xl flex-col justify-between gap-8 lg:gap-10">
         <section className="grid items-start gap-6 pt-2 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pt-4">
-          <div className="animate-reveal space-y-5 lg:space-y-6">
-            <div className="inline-flex rounded-full border border-mirror-border bg-[rgba(255,250,244,0.82)] px-3 py-1.5 text-[10px] uppercase tracking-[0.16em] text-mirror-copper shadow-soft sm:px-4 sm:py-2 sm:text-xs lg:px-4 lg:py-2 lg:text-[11px] lg:tracking-[0.18em]">
-              Miroir d’Intuition · Premier éclairage personnel
-            </div>
+          <div className="animate-reveal space-y-6 lg:space-y-6">
+  <div className="inline-flex max-w-fit rounded-full border border-mirror-border bg-[rgba(255,250,244,0.82)] px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-mirror-copper shadow-soft sm:px-4 sm:py-2 sm:text-xs lg:px-4 lg:py-2 lg:text-[11px] lg:tracking-[0.18em]">
+    Miroir d’Intuition
+  </div>
 
-            <div className="space-y-3 lg:space-y-4">
-              <h1 className="max-w-3xl text-[2.6rem] font-semibold leading-[0.95] text-mirror-ink sm:text-[3rem] lg:text-[4.4rem] lg:leading-[0.96]">
-                Ce que vous ressentez mérite peut-être d’être écouté autrement.
-              </h1>
+  <div className="space-y-4 lg:space-y-4">
+    <h1 className="max-w-3xl text-[2.25rem] font-semibold leading-[0.94] text-mirror-ink sm:text-[2.7rem] lg:text-[4.4rem] lg:leading-[0.96]">
+      Ce que vous ressentez mérite peut-être d’être écouté autrement.
+    </h1>
 
-              <p className="max-w-2xl text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-7 lg:text-lg lg:leading-8">
-                Décrivez librement votre situation du moment. Recevez un premier éclairage structuré pour
-                mieux distinguer ce qui se joue en vous.
-              </p>
-            </div>
+    <p className="max-w-2xl text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-7 lg:text-lg lg:leading-8">
+      Décrivez librement votre situation du moment. Recevez un premier éclairage structuré pour
+      mieux distinguer ce qui se joue en vous.
+    </p>
+  </div>
 
             <div className="pt-1">
               <Link
