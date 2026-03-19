@@ -178,12 +178,12 @@ export default function AnalysePage() {
           </label>
 
           <textarea
-            id="situation"
-            className="min-h-[200px] rounded-[22px] border border-[rgba(184,111,77,0.22)] bg-[rgba(255,252,248,0.78)] px-4 py-4 text-[15px] leading-7 text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.38)] focus:bg-[rgba(255,252,248,0.95)] focus:shadow-[0_0_0_5px_rgba(184,111,77,0.08)] sm:min-h-[240px] sm:rounded-[24px] sm:px-6 sm:py-5 sm:text-lg sm:leading-8"
-            value={situation}
-            onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setSituation(event.target.value)}
-            placeholder="Exemple : Je sens qu’un changement est nécessaire, mais je n’arrive pas à savoir si c’est une intuition profonde ou simplement la peur de continuer comme avant..."
-          />
+  id="situation"
+  className="min-h-[320px] rounded-[22px] border border-[rgba(184,111,77,0.22)] bg-[rgba(255,252,248,0.78)] px-4 py-4 text-[15px] leading-7 text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.38)] focus:bg-[rgba(255,252,248,0.95)] focus:shadow-[0_0_0_5px_rgba(184,111,77,0.08)] sm:min-h-[320px] sm:rounded-[24px] sm:px-6 sm:py-5 sm:text-lg sm:leading-8"
+  value={situation}
+  onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setSituation(event.target.value)}
+  placeholder="Exemple : Je sens qu’un changement est nécessaire, mais je n’arrive pas à savoir si c’est une intuition profonde ou simplement la peur de continuer comme avant..."
+/>
 
           <div className="flex flex-col gap-2 text-[13px] text-mirror-muted sm:flex-row sm:items-center sm:justify-between sm:text-sm">
             <p>Minimum 40 caractères pour un éclairage plus précis.</p>
