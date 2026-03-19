@@ -97,7 +97,7 @@ export default function AnalysePage() {
           </p>
 
           <h1 className="mt-3 text-[2rem] font-semibold leading-tight text-mirror-ink sm:text-4xl lg:mt-4 lg:text-5xl">
-            Nous préparons votre premier éclairage.
+            Nous préparons ce que votre situation révèle.
           </h1>
 
           <p className="mt-3 max-w-2xl text-[15px] leading-7 text-mirror-muted sm:mt-4 sm:text-base">
