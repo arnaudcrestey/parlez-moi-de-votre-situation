@@ -27,16 +27,14 @@ export default function StartPage() {
               </p>
             </div>
 
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Link className="mirror-button w-full sm:w-auto" href="/analyse">
-                Commencer
-              </Link>
-
-              <p className="text-sm leading-6 text-mirror-muted">
-                Un parcours simple, calme et structuré pour clarifier ce que vous sentez déjà.
-              </p>
-            </div>
-          </div>
+            <div className="pt-2">
+  <Link
+    className="inline-flex min-h-[58px] items-center justify-center rounded-[20px] bg-mirror-terracotta px-8 text-base font-semibold text-white shadow-[0_14px_30px_rgba(168,93,61,0.22)] transition hover:translate-y-[-1px] hover:shadow-[0_18px_34px_rgba(168,93,61,0.28)]"
+    href="/analyse"
+  >
+    Commencer
+  </Link>
+</div>
 
           <div className="animate-reveal [animation-delay:120ms]">
             <div className="mirror-shell min-h-[440px] p-7 sm:p-9">
