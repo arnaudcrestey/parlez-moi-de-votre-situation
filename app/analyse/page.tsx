@@ -88,62 +88,69 @@ export default function AnalysePage() {
     return null;
   }
 
-  if (loading) {
-    return (
-      <main className="flex min-h-screen items-center px-4 py-5 sm:px-6 sm:py-8 lg:px-8">
-        <section className="mx-auto w-full max-w-3xl mirror-shell p-5 sm:p-8 lg:p-10">
-          <p className="text-[10px] uppercase tracking-[0.16em] text-mirror-copper sm:text-xs sm:tracking-[0.18em]">
-            Analyse en cours
+ if (loading) {
+  return (
+    <main className="flex min-h-screen items-center px-4 py-5 sm:px-6 sm:py-8 lg:px-8">
+      <section className="mx-auto w-full max-w-3xl mirror-shell p-5 sm:p-8 lg:p-10">
+        <p className="text-[10px] uppercase tracking-[0.16em] text-mirror-copper sm:text-xs sm:tracking-[0.18em]">
+          Analyse en cours
+        </p>
+
+        <h1 className="mt-3 text-[2rem] font-semibold leading-tight text-mirror-ink sm:text-4xl lg:mt-4 lg:text-5xl">
+          Nous préparons ce que votre situation révèle.
+        </h1>
+
+        <p className="mt-3 max-w-2xl text-[15px] leading-7 text-mirror-muted sm:mt-4 sm:text-base">
+          Prenez une respiration. L’analyse se structure doucement à partir de ce que vous avez confié.
+        </p>
+
+        <div className="mt-5 flex items-center gap-3">
+          <div className="h-5 w-5 animate-spin rounded-full border-2 border-[rgba(184,111,77,0.22)] border-t-mirror-terracotta" />
+          <p className="text-sm text-mirror-muted">
+            Laissez quelques instants à votre lecture pour se révéler…
           </p>
+        </div>
 
-          <h1 className="mt-3 text-[2rem] font-semibold leading-tight text-mirror-ink sm:text-4xl lg:mt-4 lg:text-5xl">
-            Nous préparons ce que votre situation révèle.
-          </h1>
-
-          <p className="mt-3 max-w-2xl text-[15px] leading-7 text-mirror-muted sm:mt-4 sm:text-base">
-            Prenez une respiration. L’analyse se structure doucement à partir de ce que vous avez confié.
-          </p>
-
-          <div className="mt-7 space-y-4 sm:mt-8 sm:space-y-5">
-            <div className="h-2 overflow-hidden rounded-full bg-[rgba(220,199,174,0.42)]">
-              <div
-                className="h-full rounded-full bg-[linear-gradient(90deg,#b86f4d,#8e4b32)] transition-all duration-700"
-                style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-              />
-            </div>
-
-            <div className="grid gap-3">
-              {steps.map((step, index) => {
-                const active = index <= currentStep;
-
-                return (
-                  <div
-                    key={step}
-                    className={`flex items-center gap-3 rounded-[18px] border px-4 py-3.5 transition-all duration-500 sm:gap-4 sm:rounded-[20px] sm:py-4 ${
-                      active
-                        ? 'border-[rgba(184,111,77,0.18)] bg-[rgba(255,250,244,0.92)]'
-                        : 'border-transparent bg-[rgba(255,248,240,0.42)]'
-                    }`}
-                  >
-                    <div
-                      className={`h-3 w-3 rounded-full transition-all duration-500 ${
-                        active
-                          ? 'bg-mirror-copper shadow-[0_0_0_6px_rgba(184,111,77,0.12)]'
-                          : 'bg-mirror-sand'
-                      }`}
-                    />
-                    <p className={`text-sm sm:text-base ${active ? 'text-mirror-text' : 'text-mirror-muted'}`}>
-                      {step}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+        <div className="mt-7 space-y-4 sm:mt-8 sm:space-y-5">
+          <div className="h-2 overflow-hidden rounded-full bg-[rgba(220,199,174,0.42)]">
+            <div
+              className="h-full rounded-full bg-[linear-gradient(90deg,#b86f4d,#8e4b32)] transition-all duration-700"
+              style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+            />
           </div>
-        </section>
-      </main>
-    );
-  }
+
+          <div className="grid gap-3">
+            {steps.map((step, index) => {
+              const active = index <= currentStep;
+
+              return (
+                <div
+                  key={step}
+                  className={`flex items-center gap-3 rounded-[18px] border px-4 py-3.5 transition-all duration-500 sm:gap-4 sm:rounded-[20px] sm:py-4 ${
+                    active
+                      ? 'border-[rgba(184,111,77,0.18)] bg-[rgba(255,250,244,0.92)]'
+                      : 'border-transparent bg-[rgba(255,248,240,0.42)]'
+                  }`}
+                >
+                  <div
+                    className={`h-3 w-3 rounded-full transition-all duration-500 ${
+                      active
+                        ? 'bg-mirror-copper shadow-[0_0_0_6px_rgba(184,111,77,0.12)]'
+                        : 'bg-mirror-sand'
+                    }`}
+                  />
+                  <p className={`text-sm sm:text-base ${active ? 'text-mirror-text' : 'text-mirror-muted'}`}>
+                    {step}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
 
   return (
     <main className="flex min-h-screen items-start px-4 py-5 sm:items-center sm:px-6 sm:py-8 lg:px-8">
