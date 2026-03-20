@@ -77,12 +77,16 @@ Objectif éditorial :
 - donner une impression de profondeur
 - éviter d'en dire trop
 - suggérer qu'une lecture complète irait plus loin
+- ne pas livrer une lecture complète
+- chaque bloc doit rester volontairement partiel
+- suggérer plus qu’expliquer
+- garder une part de mystère et de profondeur
 
 Longueur attendue :
-- summary : 45 à 70 mots
-- fear : 35 à 55 mots
-- intuition : 35 à 55 mots
-- nextStep : 28 à 45 mots
+- summary : 35 à 50 mots
+- fear : 25 à 40 mots
+- intuition : 25 à 40 mots
+- nextStep : 20 à 30 mots
 
 Style :
 - phrases plutôt courtes
