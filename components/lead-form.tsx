@@ -141,7 +141,7 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
         </p>
 
         <h2 className="mt-3 text-[1.9rem] font-semibold leading-tight text-mirror-ink sm:text-[2.2rem] lg:text-[2.5rem]">
-          Approfondir votre lecture avec le thème astral
+          Approfondir votre lecture avec votre thème astral
         </h2>
 
         <p className="mt-4 text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
