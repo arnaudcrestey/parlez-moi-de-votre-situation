@@ -7,7 +7,7 @@ export function ShareMirror() {
 
   const shareMessage = useMemo(
     () =>
-      "J’ai testé Miroir d’Intuition. C’est une expérience sobre pour mettre des mots sur ce que l’on traverse et faire émerger un premier axe de clarté. Si tu veux, tu peux faire ton propre miroir ici : https://parlez-moi-de-votre-situation.vercel.app/start",
+      "Je viens de découvrir Miroir d’Intuition. C’est une expérience simple et intuitive pour mettre des mots sur une période floue et faire apparaître un premier éclairage.. Si tu veux, tu peux faire ton propre miroir ici : https://parlez-moi-de-votre-situation.vercel.app/start",
     []
   );
 
@@ -36,8 +36,7 @@ export function ShareMirror() {
         </h2>
 
         <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-          Une expérience sobre pour mettre des mots sur ce que l’on traverse. Vous pouvez la partager
-          à quelqu’un qui vit peut-être aussi une période de flou ou de questionnement.
+          Partagez Miroir d’Intuition avec une personne qui traverse peut-être elle aussi une période de flou.
         </p>
 
         <div className="mx-auto mt-6 max-w-3xl rounded-[22px] border border-mirror-border bg-[rgba(255,250,244,0.88)] p-5 text-left sm:rounded-[24px] sm:p-6">
