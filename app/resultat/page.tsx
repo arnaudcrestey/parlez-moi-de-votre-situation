@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { LeadForm } from '@/components/lead-form';
+import { ShareMirror } from '@/components/share-mirror';
 import type { AnalysisResult } from '@/lib/mirror-analysis';
 
 const sections: Array<{ key: keyof AnalysisResult; title: string }> = [
@@ -20,6 +21,7 @@ const sections: Array<{ key: keyof AnalysisResult; title: string }> = [
 
 function shortenText(text: string, maxLength: number) {
   if (!text) return '';
+
   const clean = text.trim();
   if (clean.length <= maxLength) return clean;
 
@@ -110,7 +112,7 @@ export default function ResultatPage() {
                 </h1>
 
                 <p className="mt-4 max-w-xl text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-                  Une mise en lumière douce et structurée de votre situation, pour commencer à vous aider à y voir plus clair 
+                  Une mise en lumière douce et structurée de votre situation, pour commencer à vous aider à y voir plus clair.
                 </p>
               </div>
 
@@ -153,14 +155,12 @@ export default function ResultatPage() {
 
         <section className="mirror-shell p-5 sm:p-8 lg:p-10">
           <div className="max-w-3xl">
-            
-
             <h2 className="mt-3 text-[1.9rem] font-semibold leading-tight text-mirror-ink sm:text-[2.2rem] lg:text-[2.5rem]">
               Recevoir la lecture complète
             </h2>
 
             <p className="mt-4 text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-            Recevez par e-mail une lecture plus approfondie, plus nuancée et plus personnelle de votre situation.
+              Recevez par e-mail une lecture plus approfondie, plus nuancée et plus personnelle de votre situation.
             </p>
           </div>
 
@@ -168,6 +168,8 @@ export default function ResultatPage() {
             <LeadForm situation={situation} analysis={analysis} />
           </div>
         </section>
+
+        <ShareMirror />
       </div>
     </main>
   );
