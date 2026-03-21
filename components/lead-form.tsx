@@ -118,20 +118,32 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
   };
 
   if (status === 'success') {
-    return (
-      <div className="rounded-[28px] border border-[rgba(90,60,40,0.08)] bg-[linear-gradient(180deg,rgba(255,250,244,0.92),rgba(255,246,238,0.72))] p-6 shadow-soft sm:p-8 lg:p-10">
-        <p className="text-[10px] uppercase tracking-[0.16em] text-mirror-copper sm:text-xs sm:tracking-[0.18em]">
-          Envoi confirmé
+  return (
+    <div className="rounded-[28px] border border-[rgba(90,60,40,0.08)] bg-[linear-gradient(180deg,rgba(255,250,244,0.96),rgba(255,246,238,0.78))] p-6 shadow-soft sm:p-8 lg:p-10">
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-[20px] bg-[rgba(184,111,77,0.12)] text-3xl">
+          ✉️
+        </div>
+
+        <p className="mt-5 text-[10px] uppercase tracking-[0.16em] text-mirror-copper sm:text-xs sm:tracking-[0.18em]">
+          Demande confirmée ✨
         </p>
-        <h3 className="mt-3 text-[1.9rem] font-semibold leading-tight text-mirror-ink sm:text-[2.2rem]">
-          Votre demande a bien été envoyée.
+
+        <h3 className="mt-3 text-[1.9rem] font-semibold leading-tight text-mirror-ink sm:text-[2.3rem]">
+          Votre demande a bien été enregistrée.
         </h3>
-        <p className="mt-4 max-w-2xl text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-          Le <span className="font-semibold text-mirror-terracotta">Cabinet Astrae</span> vous recontactera pour approfondir votre lecture et explorer, à travers votre thème astral, ce qui cherche à se révéler plus clairement dans votre situation.
+
+        <p className="mt-4 text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
+          Le <span className="font-semibold text-mirror-terracotta">Cabinet Astrae</span> vous recontactera pour approfondir votre lecture et explorer, à travers votre thème astral, les dynamiques qui traversent votre situation.
+        </p>
+
+        <p className="mt-4 text-sm leading-7 text-mirror-brown">
+          Pensez à vérifier votre boîte e-mail ainsi que vos courriers indésirables.
         </p>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
   return (
     <div className="rounded-[28px] border border-[rgba(90,60,40,0.08)] bg-[linear-gradient(180deg,rgba(255,250,244,0.92),rgba(255,246,238,0.72))] p-5 shadow-soft sm:p-8 lg:p-10">
