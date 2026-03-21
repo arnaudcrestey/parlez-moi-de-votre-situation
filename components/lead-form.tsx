@@ -131,7 +131,7 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
         </p>
 
         <p className="mt-4 text-[15px] leading-7 text-mirror-brown sm:text-base sm:leading-8">
-          🎁 Recevez <span className="font-semibold text-mirror-terracotta">gratuitement</span> un premier retour enrichi à partir de vos informations de naissance.
+          🎁 Recevez <span className="font-semibold text-mirror-terracotta">gratuitement</span> un premier retour à partir de vos informations de naissance.
         </p>
       </div>
 
