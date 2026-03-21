@@ -160,8 +160,7 @@ export default function ResultatPage() {
             </h2>
 
             <p className="mt-4 text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-              Cet aperçu révèle déjà une partie de ce qui se joue. Recevez par e-mail une lecture plus
-              approfondie, plus nuancée et plus personnelle de votre situation.
+            Recevez par e-mail une lecture plus approfondie, plus nuancée et plus personnelle de votre situation.
             </p>
           </div>
 
