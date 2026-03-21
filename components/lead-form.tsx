@@ -127,8 +127,7 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
           Votre demande a bien été envoyée.
         </h3>
         <p className="mt-4 max-w-2xl text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-          Le Cabinet Astrae vous recontactera pour approfondir votre lecture et explorer, à travers votre thème astral,
-          ce qui cherche à se révéler plus clairement dans votre situation.
+          Le <span className="font-semibold text-mirror-terracotta">Cabinet Astrae</span> vous recontactera pour approfondir votre lecture et explorer, à travers votre thème astral, ce qui cherche à se révéler plus clairement dans votre situation.
         </p>
       </div>
     );
@@ -142,16 +141,15 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
         </p>
 
         <h2 className="mt-3 text-[1.9rem] font-semibold leading-tight text-mirror-ink sm:text-[2.2rem] lg:text-[2.5rem]">
-          Recevoir une lecture plus approfondie
+          Approfondir votre lecture avec le thème astral
         </h2>
 
         <p className="mt-4 text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-          Cet aperçu révèle déjà une partie de ce qui se joue. Pour aller plus loin, le Cabinet Astrae peut approfondir
-          votre situation à travers une lecture plus personnelle, éclairée par votre thème astral.
+          Pour aller plus loin, le <span className="font-semibold text-mirror-terracotta">Cabinet Astrae</span> peut éclairer votre situation à travers une lecture plus personnelle, enrichie par votre thème astral.
         </p>
 
         <p className="mt-4 text-[15px] leading-7 text-mirror-brown sm:text-base sm:leading-8">
-          🎁 Recevez gratuitement un premier retour enrichi à partir de vos informations de naissance.
+          🎁 Recevez <span className="font-semibold text-mirror-terracotta">gratuitement</span> un premier retour enrichi à partir de vos informations de naissance.
         </p>
       </div>
 
