@@ -36,7 +36,7 @@ export function ShareMirror() {
         </h2>
 
         <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-          Partagez Miroir d’Intuition avec une personne qui traverse peut-être elle aussi une période de flou.
+          Partagez l'expérience avec une personne qui traverse peut-être elle aussi une période de flou.
         </p>
 
         <div className="mx-auto mt-6 max-w-3xl rounded-[22px] border border-mirror-border bg-[rgba(255,250,244,0.88)] p-5 text-left sm:rounded-[24px] sm:p-6">
