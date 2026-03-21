@@ -3,6 +3,12 @@ import type { AnalysisResult } from '@/lib/mirror-analysis';
 type BuildLeadEmailParams = {
   firstName: string;
   email?: string;
+  birthDay?: string;
+  birthMonth?: string;
+  birthYear?: string;
+  birthHour?: string;
+  birthMinute?: string;
+  birthCity?: string;
   situation: string;
   analysis: AnalysisResult;
 };
@@ -18,9 +24,25 @@ const escapeHtml = (value: string) =>
 export function buildLeadEmail({
   firstName,
   email = '',
+  birthDay = '',
+  birthMonth = '',
+  birthYear = '',
+  birthHour = '',
+  birthMinute = '',
+  birthCity = '',
   situation,
   analysis
 }: BuildLeadEmailParams) {
+  const birthDate =
+    birthDay || birthMonth || birthYear
+      ? `${escapeHtml(birthDay)}/${escapeHtml(birthMonth)}/${escapeHtml(birthYear)}`
+      : 'Non renseignée';
+
+  const birthTime =
+    birthHour || birthMinute
+      ? `${escapeHtml(birthHour || '--')}:${escapeHtml(birthMinute || '--')}`
+      : 'Non renseignée';
+
   return `
     <div style="margin:0;padding:0;background:#f6f6f6;font-family:Arial,Helvetica,sans-serif;color:#1f1f1f;">
       <div style="max-width:620px;margin:0 auto;background:#ffffff;padding:28px 24px;">
@@ -44,6 +66,18 @@ export function buildLeadEmail({
 
         <p style="margin:0 0 8px;font-size:14px;line-height:1.6;">
           <strong>Email :</strong> <a href="mailto:${escapeHtml(email)}" style="color:#1a73e8;text-decoration:none;">${escapeHtml(email)}</a>
+        </p>
+
+        <p style="margin:0 0 8px;font-size:14px;line-height:1.6;">
+          <strong>Date de naissance :</strong> ${birthDate}
+        </p>
+
+        <p style="margin:0 0 8px;font-size:14px;line-height:1.6;">
+          <strong>Heure de naissance :</strong> ${birthTime}
+        </p>
+
+        <p style="margin:0 0 8px;font-size:14px;line-height:1.6;">
+          <strong>Ville de naissance :</strong> ${escapeHtml(birthCity || 'Non renseignée')}
         </p>
 
         <hr style="border:none;border-top:1px solid #e7e7e7;margin:18px 0;" />
