@@ -45,12 +45,11 @@ export async function POST(request: Request) {
       );
     }
 
-    const html = buildLeadEmail({
-      firstName,
-      email,
-      situation,
-      analysis: analysisResult
-    });
+   const html = buildLeadEmail({
+  firstName,
+  situation,
+  analysis: analysisResult
+});
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
