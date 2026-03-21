@@ -1,51 +1,95 @@
 import type { AnalysisResult } from '@/lib/mirror-analysis';
 
+type BuildLeadEmailParams = {
+  firstName: string;
+  situation: string;
+  analysis: AnalysisResult;
+};
+
 const escapeHtml = (value: string) =>
   value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
 
 export function buildLeadEmail({
   firstName,
   situation,
   analysis
-}: {
-  firstName: string;
-  situation: string;
-  analysis: AnalysisResult;
-}) {
+}: BuildLeadEmailParams) {
   return `
-    <div style="background:#f6efe7;padding:32px;font-family:Inter,Arial,sans-serif;color:#2c211b;line-height:1.6;">
-      <div style="max-width:680px;margin:0 auto;background:rgba(255,248,240,0.92);border:1px solid rgba(90,60,40,0.12);border-radius:28px;box-shadow:0 18px 45px rgba(60,35,20,0.10);overflow:hidden;">
-        <div style="padding:32px 32px 12px;">
-          <p style="margin:0 0 10px;color:#8e4b32;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;">Miroir d’Intuition</p>
-          <h1 style="margin:0 0 12px;font-size:30px;line-height:1.15;color:#1e1612;">Bonjour ${escapeHtml(firstName)},</h1>
-          <p style="margin:0;color:#6f5a4f;">Voici votre éclairage complet, préparé à partir de ce que vous avez partagé.</p>
+    <div style="margin:0;padding:0;background:#f6f6f6;font-family:Arial,Helvetica,sans-serif;color:#1f1f1f;">
+      <div style="max-width:760px;margin:0 auto;background:#ffffff;padding:32px 28px;">
+        <h1 style="margin:0 0 10px;font-size:34px;line-height:1.2;font-weight:700;color:#111111;">
+          Nouveau lead Miroir d’Intuition
+        </h1>
+
+        <p style="margin:0 0 26px;font-size:18px;line-height:1.6;color:#333333;">
+          Un utilisateur vient de compléter son parcours.
+        </p>
+
+        <hr style="border:none;border-top:1px solid #e7e7e7;margin:24px 0;" />
+
+        <h2 style="margin:0 0 18px;font-size:28px;line-height:1.3;font-weight:700;color:#111111;">
+          👤 Informations
+        </h2>
+
+        <p style="margin:0 0 12px;font-size:22px;line-height:1.6;">
+          <strong>Prénom :</strong> ${escapeHtml(firstName)}
+        </p>
+
+        <hr style="border:none;border-top:1px solid #e7e7e7;margin:24px 0;" />
+
+        <h2 style="margin:0 0 18px;font-size:28px;line-height:1.3;font-weight:700;color:#111111;">
+          📝 Situation
+        </h2>
+
+        <p style="margin:0 0 8px;font-size:22px;line-height:1.75;color:#222222;">
+          ${escapeHtml(situation).replaceAll('\n', '<br />')}
+        </p>
+
+        <hr style="border:none;border-top:1px solid #e7e7e7;margin:24px 0;" />
+
+        <h2 style="margin:0 0 18px;font-size:28px;line-height:1.3;font-weight:700;color:#111111;">
+          📖 Début d’éclairage
+        </h2>
+
+        <div style="margin:0 0 22px;">
+          <p style="margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#8f5b3f;">
+            01 · Ce que vous semblez traverser
+          </p>
+          <p style="margin:0;font-size:20px;line-height:1.75;color:#222222;">
+            ${escapeHtml(analysis.summary)}
+          </p>
         </div>
-        <div style="padding:20px 32px 32px;display:grid;gap:18px;">
-          <section style="padding:20px;border-radius:22px;background:#fffaf4;border:1px solid rgba(90,60,40,0.12);">
-            <p style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#8e4b32;">Votre situation</p>
-            <p style="margin:0;color:#3a2a22;">${escapeHtml(situation)}</p>
-          </section>
-          ${[
-            ['Ce que vous semblez traverser', analysis.summary],
-            ['Ce qui relève peut-être de la peur ou de la surcharge mentale', analysis.fear],
-            ['Ce que votre intuition essaie peut-être de vous montrer', analysis.intuition],
-            ['La piste douce à explorer maintenant', analysis.nextStep]
-          ]
-            .map(
-              ([title, text]) => `
-                <section style="padding:20px;border-radius:22px;background:rgba(255,250,244,0.92);border:1px solid rgba(90,60,40,0.12);">
-                  <p style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#8e4b32;">${title}</p>
-                  <p style="margin:0;color:#3a2a22;">${escapeHtml(text)}</p>
-                </section>
-              `
-            )
-            .join('')}
-          <p style="margin:6px 0 0;color:#6f5a4f;">Avec douceur,<br />Cabinet Astrae</p>
+
+        <div style="margin:0 0 22px;">
+          <p style="margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#8f5b3f;">
+            02 · Ce qui relève peut-être de la peur ou de la surcharge mentale
+          </p>
+          <p style="margin:0;font-size:20px;line-height:1.75;color:#222222;">
+            ${escapeHtml(analysis.fear)}
+          </p>
+        </div>
+
+        <div style="margin:0 0 22px;">
+          <p style="margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#8f5b3f;">
+            03 · Ce que votre intuition essaie peut-être de vous montrer
+          </p>
+          <p style="margin:0;font-size:20px;line-height:1.75;color:#222222;">
+            ${escapeHtml(analysis.intuition)}
+          </p>
+        </div>
+
+        <div style="margin:0 0 10px;">
+          <p style="margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#8f5b3f;">
+            04 · La piste douce à explorer maintenant
+          </p>
+          <p style="margin:0;font-size:20px;line-height:1.75;color:#222222;">
+            ${escapeHtml(analysis.nextStep)}
+          </p>
         </div>
       </div>
     </div>
