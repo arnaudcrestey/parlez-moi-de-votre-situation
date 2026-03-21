@@ -2,6 +2,7 @@
 
 import type { ChangeEvent, FormEvent } from 'react';
 import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import type { AnalysisResult } from '@/lib/mirror-analysis';
 
 const initialState = {
@@ -21,8 +22,9 @@ type LeadFormProps = {
 };
 
 export function LeadForm({ situation, analysis }: LeadFormProps) {
+  const router = useRouter();
   const [form, setForm] = useState(initialState);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
   const canSubmit = useMemo(() => {
@@ -106,44 +108,12 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
         throw new Error('send_failed');
       }
 
-      setStatus('success');
-      setMessage(
-        'Votre demande a bien été transmise. Le Cabinet Astrae reviendra vers vous avec une lecture plus approfondie.'
-      );
-      setForm(initialState);
+      router.push('/confirmation');
     } catch {
       setStatus('error');
       setMessage('Une difficulté temporaire est survenue. Merci de réessayer dans un instant.');
     }
   };
-
-  if (status === 'success') {
-  return (
-    <div className="rounded-[28px] border border-[rgba(90,60,40,0.08)] bg-[linear-gradient(180deg,rgba(255,250,244,0.96),rgba(255,246,238,0.78))] p-6 shadow-soft sm:p-8 lg:p-10">
-      <div className="mx-auto max-w-2xl text-center">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-[20px] bg-[rgba(184,111,77,0.12)] text-3xl">
-          ✉️
-        </div>
-
-        <p className="mt-5 text-[10px] uppercase tracking-[0.16em] text-mirror-copper sm:text-xs sm:tracking-[0.18em]">
-          Demande confirmée ✨
-        </p>
-
-        <h3 className="mt-3 text-[1.9rem] font-semibold leading-tight text-mirror-ink sm:text-[2.3rem]">
-          Votre demande a bien été enregistrée.
-        </h3>
-
-        <p className="mt-4 text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-          Le <span className="font-semibold text-mirror-terracotta">Cabinet Astrae</span> vous recontactera pour approfondir votre lecture et explorer, à travers votre thème astral, les dynamiques qui traversent votre situation.
-        </p>
-
-        <p className="mt-4 text-sm leading-7 text-mirror-brown">
-          Pensez à vérifier votre boîte e-mail ainsi que vos courriers indésirables.
-        </p>
-      </div>
-    </div>
-  );
-}
 
   return (
     <div className="rounded-[28px] border border-[rgba(90,60,40,0.08)] bg-[linear-gradient(180deg,rgba(255,250,244,0.92),rgba(255,246,238,0.72))] p-5 shadow-soft sm:p-8 lg:p-10">
@@ -153,7 +123,7 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
         </p>
 
         <h2 className="mt-3 text-[1.9rem] font-semibold leading-tight text-mirror-ink sm:text-[2.2rem] lg:text-[2.5rem]">
-          Approfondir votre lecture avec votre thème astral
+          Approfondir votre lecture avec le thème astral
         </h2>
 
         <p className="mt-4 text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
@@ -186,47 +156,17 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
         <div className="space-y-3">
           <p className="text-[14px] font-medium text-mirror-text">Date de naissance</p>
           <div className="grid grid-cols-3 gap-3">
-            <input
-              className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
-              value={form.birthDay}
-              onChange={handleChange('birthDay')}
-              placeholder="Jour"
-              inputMode="numeric"
-            />
-            <input
-              className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
-              value={form.birthMonth}
-              onChange={handleChange('birthMonth')}
-              placeholder="Mois"
-              inputMode="numeric"
-            />
-            <input
-              className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
-              value={form.birthYear}
-              onChange={handleChange('birthYear')}
-              placeholder="Année"
-              inputMode="numeric"
-            />
+            <input className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]" value={form.birthDay} onChange={handleChange('birthDay')} placeholder="Jour" inputMode="numeric" />
+            <input className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]" value={form.birthMonth} onChange={handleChange('birthMonth')} placeholder="Mois" inputMode="numeric" />
+            <input className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]" value={form.birthYear} onChange={handleChange('birthYear')} placeholder="Année" inputMode="numeric" />
           </div>
         </div>
 
         <div className="space-y-3">
           <p className="text-[14px] font-medium text-mirror-text">Heure de naissance</p>
           <div className="grid grid-cols-2 gap-3">
-            <input
-              className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
-              value={form.birthHour}
-              onChange={handleChange('birthHour')}
-              placeholder="Heure"
-              inputMode="numeric"
-            />
-            <input
-              className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
-              value={form.birthMinute}
-              onChange={handleChange('birthMinute')}
-              placeholder="Minute"
-              inputMode="numeric"
-            />
+            <input className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]" value={form.birthHour} onChange={handleChange('birthHour')} placeholder="Heure" inputMode="numeric" />
+            <input className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]" value={form.birthMinute} onChange={handleChange('birthMinute')} placeholder="Minute" inputMode="numeric" />
           </div>
         </div>
 
