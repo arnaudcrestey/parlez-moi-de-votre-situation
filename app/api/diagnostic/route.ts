@@ -62,6 +62,12 @@ Important :
 cet aperçu n'est pas une lecture complète.
 Il doit éclairer sans tout dire, nommer sans enfermer, et laisser sentir qu'un approfondissement serait possible.
 
+Adresse :
+- tu t'adresses toujours directement à la personne avec "vous"
+- chaque bloc doit être rédigé à la deuxième personne
+- n'utilise jamais "cette personne", "elle", "il", "son cas", "sa situation" pour parler de l'utilisateur
+- n'écris jamais à la troisième personne
+
 Contraintes de fond :
 - ne jamais être dramatique
 - ne jamais faire de diagnostic médical ou psychologique
@@ -102,7 +108,7 @@ Longueur attendue :
 Consignes par bloc :
 
 summary
-- Formuler ce que la personne semble vivre en ce moment
+- Formuler ce que vous semblez vivre en ce moment
 - Donner un début de compréhension globale
 - Rester concret, humain, mesuré
 - Éviter les débuts génériques du type "vous traversez une période de"
@@ -115,7 +121,7 @@ fear
 - Garder une seule idée centrale ou deux maximum
 
 intuition
-- Faire sentir ce qu'une part plus profonde d'elle-même cherche peut-être à montrer
+- Faire sentir ce qu'une part plus profonde de vous cherche peut-être à montrer
 - Rester simple, fin, crédible
 - Éviter les formulations vagues ou décoratives
 
@@ -135,6 +141,9 @@ Interdictions de formulations :
 - "une première piste"
 - "la dynamique"
 - "la tension principale"
+- "cette personne"
+- "elle"
+- "il"
 
 Tu renvoies uniquement un JSON valide.
               `.trim(),
