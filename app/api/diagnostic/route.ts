@@ -1,7 +1,7 @@
-import OpenAI from 'openai';
+import OpenAI from "openai";
 
 const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 type DiagnosticResult = {
@@ -15,114 +15,145 @@ export async function POST(req: Request) {
   try {
     const { situation } = await req.json();
 
-    if (!situation || typeof situation !== 'string' || situation.trim().length < 40) {
-      return Response.json({ error: 'Situation invalide.' }, { status: 400 });
+    if (
+      !situation ||
+      typeof situation !== "string" ||
+      situation.trim().length < 40
+    ) {
+      return Response.json({ error: "Situation invalide." }, { status: 400 });
     }
 
     const trimmedSituation = situation.trim();
 
     const response = await client.responses.create({
-      model: 'gpt-4.1-mini',
-      temperature: 0.8,
+      model: "gpt-4.1-mini",
+      temperature: 0.45,
       text: {
         format: {
-          type: 'json_schema',
-          name: 'mirror_diagnostic',
+          type: "json_schema",
+          name: "mirror_diagnostic",
           strict: true,
           schema: {
-            type: 'object',
+            type: "object",
             additionalProperties: false,
             properties: {
-              summary: { type: 'string' },
-              fear: { type: 'string' },
-              intuition: { type: 'string' },
-              nextStep: { type: 'string' }
+              summary: { type: "string" },
+              fear: { type: "string" },
+              intuition: { type: "string" },
+              nextStep: { type: "string" },
             },
-            required: ['summary', 'fear', 'intuition', 'nextStep']
-          }
-        }
+            required: ["summary", "fear", "intuition", "nextStep"],
+          },
+        },
       },
       input: [
         {
-          role: 'system',
+          role: "system",
           content: [
             {
-              type: 'input_text',
+              type: "input_text",
               text: `
-Tu es un analyste introspectif premium, sobre, nuancé, élégant et rassurant.
+Tu rédiges un premier éclairage de situation, sobre, humain, précis et crédible.
 
 Ta mission :
-à partir du texte libre de l'utilisateur, produire un aperçu psychologique et intuitif crédible, sensible et intriguant.
+à partir du texte libre de l'utilisateur, produire une lecture courte, sensible et structurée de ce qu'il traverse.
 
 Important :
-cet aperçu n'est PAS la lecture complète.
-Tu dois volontairement laisser une part d'ouverture et de mystère, afin que l'utilisateur sente qu'il existe des nuances plus profondes à découvrir ensuite.
+cet aperçu n'est pas une lecture complète.
+Il doit éclairer sans tout dire, nommer sans enfermer, et laisser sentir qu'un approfondissement serait possible.
 
 Contraintes de fond :
 - ne jamais être dramatique
-- ne jamais faire de diagnostic médical
-- ne jamais donner de conseil juridique
+- ne jamais faire de diagnostic médical ou psychologique
 - ne jamais parler comme un thérapeute
-- ne jamais affirmer des certitudes extrêmes
-- utiliser un ton doux, précis, haut de gamme, humain
-- employer naturellement des nuances comme : "semble", "peut-être", "laisse penser", "pourrait"
-- français fluide, sans jargon
-- pas de listes
-- pas de markdown
-- pas de guillemets inutiles
-- chaque bloc doit donner une sensation de justesse, mais rester légèrement ouvert
+- ne jamais donner de conseil juridique
+- ne jamais affirmer de certitudes extrêmes
+- ne jamais employer de ton mystique
+- ne jamais employer de ton marketing
+- rester humain, nuancé, calme et haut de gamme
+- écrire dans un français fluide, simple et élégant
+- éviter le flou décoratif
+- éviter les répétitions
+- éviter les phrases inutilement longues
 
-Objectif éditorial :
-- créer de la résonance
-- donner une impression de profondeur
-- éviter d'en dire trop
-- suggérer qu'une lecture complète irait plus loin
-- ne pas livrer une lecture complète
-- chaque bloc doit rester volontairement partiel
-- suggérer plus qu’expliquer
-- garder une part de mystère et de profondeur
-
-Longueur attendue :
-- summary : 35 à 50 mots
-- fear : 25 à 40 mots
-- intuition : 25 à 40 mots
-- nextStep : 20 à 30 mots
+Posture attendue :
+- comprendre vite ce qui est central
+- formuler avec tact
+- suggérer sans sur-expliquer
+- rester volontairement partiel
+- donner une impression de justesse immédiate
 
 Style :
 - phrases plutôt courtes
-- dense mais respirant
-- subtil
-- pas d'emphase excessive
-- pas de ton marketing
+- écriture dense mais respirante
+- ton sobre, direct, nuancé
+- pas de listes dans les contenus
+- pas de markdown
+- pas de guillemets inutiles
+
+Longueur attendue :
+- summary : 32 à 42 mots maximum
+- fear : 18 à 28 mots maximum
+- intuition : 18 à 28 mots maximum
+- nextStep : 16 à 26 mots maximum
+
+Consignes par bloc :
+
+summary
+- Formuler ce que la personne semble vivre en ce moment
+- Donner un début de compréhension globale
+- Rester concret, humain, mesuré
+
+fear
+- Nommer avec tact ce qui pèse, inquiète ou surcharge intérieurement
+- Ne pas dramatiser
+- Ne pas surinterpréter
+
+intuition
+- Faire sentir ce qu'une part plus profonde d'elle-même cherche peut-être à montrer
+- Rester simple, fin, crédible
+
+nextStep
+- Ouvrir vers une suite possible, sans insister
+- Suggérer qu'un regard plus approfondi pourrait aider à y voir plus clair
+- Mentionner très naturellement le thème astral
+- Donner le sentiment d'une continuité logique, pas d'une proposition commerciale
+- Rester très sobre
+
+Règle décisive :
+si une phrase peut être raccourcie sans perdre en justesse, il faut la raccourcir.
 
 Tu renvoies uniquement un JSON valide.
-              `.trim()
-            }
-          ]
+              `.trim(),
+            },
+          ],
         },
         {
-          role: 'user',
+          role: "user",
           content: [
             {
-              type: 'input_text',
-              text: `Situation utilisateur : ${trimmedSituation}`
-            }
-          ]
-        }
-      ]
+              type: "input_text",
+              text: `Situation utilisateur : ${trimmedSituation}`,
+            },
+          ],
+        },
+      ],
     });
 
     const text = response.output_text?.trim();
 
     if (!text) {
-      throw new Error('Réponse vide');
+      throw new Error("Réponse vide");
     }
 
     const analysis = JSON.parse(text) as DiagnosticResult;
 
     return Response.json(analysis);
   } catch (error) {
-    console.error('Diagnostic error:', error);
-    return Response.json({ error: 'Impossible de générer l’analyse.' }, { status: 500 });
+    console.error("Diagnostic error:", error);
+    return Response.json(
+      { error: "Impossible de générer l’analyse." },
+      { status: 500 }
+    );
   }
 }
