@@ -61,6 +61,23 @@ export async function POST(request: Request) {
       );
     }
 
+    if (
+      !process.env.SMTP_HOST ||
+      !process.env.SMTP_PORT ||
+      !process.env.SMTP_USER ||
+      !process.env.SMTP_PASS ||
+      !process.env.LEAD_EMAIL
+    ) {
+      console.error('Missing SMTP environment variables');
+
+      return NextResponse.json(
+        {
+          error: 'Configuration e-mail incomplète côté serveur.'
+        },
+        { status: 500 }
+      );
+    }
+
     const html = buildLeadEmail({
       firstName,
       email,
@@ -75,16 +92,20 @@ export async function POST(request: Request) {
     });
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: Number(process.env.SMTP_PORT) === 465,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS
       }
     });
 
+    await transporter.verify();
+
     await transporter.sendMail({
-      from: `"Miroir d’Intuition" <${process.env.EMAIL_USER}>`,
-      to: 'contact@cabinet-astrae.fr',
+      from: `"Miroir d’Intuition" <${process.env.SMTP_USER}>`,
+      to: process.env.LEAD_EMAIL,
       replyTo: email,
       subject: `Nouveau lead - Miroir d’Intuition - ${firstName}`,
       html
