@@ -84,7 +84,7 @@ export async function POST(request: Request) {
 
     await transporter.sendMail({
       from: `"Miroir d’Intuition" <${process.env.EMAIL_USER}>`,
-      to: 'arnaud.crestey14@gmail.com',
+      to: 'contact@cabinet-astrae.fr',
       replyTo: email,
       subject: `Nouveau lead - Miroir d’Intuition - ${firstName}`,
       html
