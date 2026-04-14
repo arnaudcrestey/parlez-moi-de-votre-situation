@@ -21,8 +21,38 @@ type LeadFormProps = {
   analysis: AnalysisResult;
 };
 
+function isEmailValid(email: string) {
+  return /\S+@\S+\.\S+/.test(email);
+}
+
+function isDayValid(day: string) {
+  const value = Number(day);
+  return day.trim().length > 0 && value >= 1 && value <= 31;
+}
+
+function isMonthValid(month: string) {
+  const value = Number(month);
+  return month.trim().length > 0 && value >= 1 && value <= 12;
+}
+
+function isYearValid(year: string) {
+  const value = Number(year);
+  return year.trim().length === 4 && value >= 1900 && value <= 2100;
+}
+
+function isHourValid(hour: string) {
+  const value = Number(hour);
+  return hour.trim().length > 0 && value >= 0 && value <= 23;
+}
+
+function isMinuteValid(minute: string) {
+  const value = Number(minute);
+  return minute.trim().length > 0 && value >= 0 && value <= 59;
+}
+
 export function LeadForm({ situation, analysis }: LeadFormProps) {
   const router = useRouter();
+
   const [form, setForm] = useState(initialState);
   const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
   const [message, setMessage] = useState('');
@@ -30,10 +60,12 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
   const canSubmit = useMemo(() => {
     return (
       form.firstName.trim().length >= 2 &&
-      /\S+@\S+\.\S+/.test(form.email) &&
-      form.birthDay.trim().length >= 1 &&
-      form.birthMonth.trim().length >= 1 &&
-      form.birthYear.trim().length === 4 &&
+      isEmailValid(form.email.trim()) &&
+      isDayValid(form.birthDay.trim()) &&
+      isMonthValid(form.birthMonth.trim()) &&
+      isYearValid(form.birthYear.trim()) &&
+      isHourValid(form.birthHour.trim()) &&
+      isMinuteValid(form.birthMinute.trim()) &&
       form.birthCity.trim().length >= 2
     );
   }, [form]);
@@ -70,6 +102,11 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
         ...current,
         [field]: value
       }));
+
+      if (status === 'error') {
+        setStatus('idle');
+        setMessage('');
+      }
     };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -77,7 +114,9 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
 
     if (!canSubmit) {
       setStatus('error');
-      setMessage('Merci de renseigner les informations essentielles pour recevoir votre lecture.');
+      setMessage(
+        'Merci de renseigner votre prénom, votre e-mail, votre date de naissance complète, votre heure de naissance et votre ville de naissance.'
+      );
       return;
     }
 
@@ -111,7 +150,9 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
       router.push('/confirmation');
     } catch {
       setStatus('error');
-      setMessage('Une difficulté temporaire est survenue. Merci de réessayer dans un instant.');
+      setMessage(
+        'Une difficulté temporaire est survenue. Merci de réessayer dans un instant.'
+      );
     }
   };
 
@@ -127,66 +168,157 @@ export function LeadForm({ situation, analysis }: LeadFormProps) {
         </h2>
 
         <p className="mt-4 text-[15px] leading-7 text-mirror-muted sm:text-base sm:leading-8">
-          Pour aller plus loin, le <span className="font-semibold text-mirror-terracotta">Cabinet Astrae</span> peut éclairer votre situation à travers une lecture plus personnelle, enrichie par votre thème astral.
+          Pour aller plus loin, le{' '}
+          <span className="font-semibold text-mirror-terracotta">
+            Cabinet Astrae
+          </span>{' '}
+          peut éclairer votre situation à travers une lecture plus personnelle,
+          enrichie par votre thème astral.
         </p>
 
         <p className="mt-4 text-[15px] leading-7 text-mirror-brown sm:text-base sm:leading-8">
-          🎁 Recevez <span className="font-semibold text-mirror-terracotta">gratuitement</span> un premier retour à partir de vos informations de naissance.
+          🎁 Recevez{' '}
+          <span className="font-semibold text-mirror-terracotta">
+            gratuitement
+          </span>{' '}
+          un premier retour à partir de vos informations de naissance.
         </p>
       </div>
 
-      <form className="mx-auto mt-8 max-w-3xl space-y-5" onSubmit={handleSubmit}>
+      <form
+        className="mx-auto mt-8 max-w-3xl space-y-5"
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <div className="grid gap-4 md:grid-cols-2">
           <input
+            type="text"
+            name="firstName"
+            autoComplete="given-name"
             className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-5 text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
             value={form.firstName}
             onChange={handleChange('firstName')}
             placeholder="Votre prénom"
+            required
           />
 
           <input
             type="email"
+            name="email"
+            autoComplete="email"
             className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-5 text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
             value={form.email}
             onChange={handleChange('email')}
             placeholder="Votre e-mail"
+            required
           />
         </div>
 
         <div className="space-y-3">
-          <p className="text-[14px] font-medium text-mirror-text">Date de naissance</p>
+          <p className="text-[14px] font-medium text-mirror-text">
+            Date de naissance
+          </p>
+
           <div className="grid grid-cols-3 gap-3">
-            <input className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]" value={form.birthDay} onChange={handleChange('birthDay')} placeholder="Jour" inputMode="numeric" />
-            <input className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]" value={form.birthMonth} onChange={handleChange('birthMonth')} placeholder="Mois" inputMode="numeric" />
-            <input className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]" value={form.birthYear} onChange={handleChange('birthYear')} placeholder="Année" inputMode="numeric" />
+            <input
+              type="text"
+              name="birthDay"
+              inputMode="numeric"
+              className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
+              value={form.birthDay}
+              onChange={handleChange('birthDay')}
+              placeholder="Jour"
+              required
+            />
+
+            <input
+              type="text"
+              name="birthMonth"
+              inputMode="numeric"
+              className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
+              value={form.birthMonth}
+              onChange={handleChange('birthMonth')}
+              placeholder="Mois"
+              required
+            />
+
+            <input
+              type="text"
+              name="birthYear"
+              inputMode="numeric"
+              className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
+              value={form.birthYear}
+              onChange={handleChange('birthYear')}
+              placeholder="Année"
+              required
+            />
           </div>
         </div>
 
         <div className="space-y-3">
-          <p className="text-[14px] font-medium text-mirror-text">Heure de naissance</p>
+          <p className="text-[14px] font-medium text-mirror-text">
+            Heure de naissance
+          </p>
+
           <div className="grid grid-cols-2 gap-3">
-            <input className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]" value={form.birthHour} onChange={handleChange('birthHour')} placeholder="Heure" inputMode="numeric" />
-            <input className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]" value={form.birthMinute} onChange={handleChange('birthMinute')} placeholder="Minute" inputMode="numeric" />
+            <input
+              type="text"
+              name="birthHour"
+              inputMode="numeric"
+              className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
+              value={form.birthHour}
+              onChange={handleChange('birthHour')}
+              placeholder="Heure"
+              required
+            />
+
+            <input
+              type="text"
+              name="birthMinute"
+              inputMode="numeric"
+              className="min-h-[58px] rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-3 text-center text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
+              value={form.birthMinute}
+              onChange={handleChange('birthMinute')}
+              placeholder="Minute"
+              required
+            />
           </div>
+
+          <p className="text-[13px] leading-6 text-mirror-muted">
+            Si vous ne connaissez pas votre heure exacte, une estimation permet
+            déjà une première lecture.
+          </p>
         </div>
 
         <input
+          type="text"
+          name="birthCity"
+          autoComplete="address-level2"
           className="min-h-[58px] w-full rounded-[18px] border border-[rgba(184,111,77,0.16)] bg-[rgba(255,252,248,0.85)] px-5 text-[16px] text-mirror-text outline-none transition placeholder:text-[rgba(86,68,60,0.55)] focus:border-[rgba(184,111,77,0.34)] focus:bg-white focus:shadow-[0_0_0_4px_rgba(184,111,77,0.08)]"
           value={form.birthCity}
           onChange={handleChange('birthCity')}
           placeholder="Ville de naissance"
+          required
         />
 
         <div className="pt-2">
           <button
-            className="inline-flex min-h-[60px] w-full items-center justify-center rounded-[20px] bg-mirror-terracotta px-6 text-[16px] font-semibold text-white shadow-[0_14px_30px_rgba(168,93,61,0.22)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(168,93,61,0.28)]"
-            disabled={status === 'loading'}
+            className={`inline-flex min-h-[60px] w-full items-center justify-center rounded-[20px] px-6 text-[16px] font-semibold text-white transition ${
+              !canSubmit || status === 'loading'
+                ? 'cursor-not-allowed bg-[rgba(168,93,61,0.55)] shadow-none'
+                : 'bg-mirror-terracotta shadow-[0_14px_30px_rgba(168,93,61,0.22)] hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(168,93,61,0.28)]'
+            }`}
+            disabled={!canSubmit || status === 'loading'}
             type="submit"
           >
-            {status === 'loading' ? 'Envoi en cours…' : 'Recevoir ma lecture approfondie'}
+            {status === 'loading'
+              ? 'Envoi en cours…'
+              : 'Recevoir ma lecture approfondie'}
           </button>
 
-          {message ? <p className="mt-4 text-sm text-[#9b5a42]">{message}</p> : null}
+          {message ? (
+            <p className="mt-4 text-sm text-[#9b5a42]">{message}</p>
+          ) : null}
         </div>
       </form>
     </div>
