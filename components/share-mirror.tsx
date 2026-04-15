@@ -7,7 +7,7 @@ export function ShareMirror() {
 
   const shareMessage = useMemo(
     () =>
-      "Je viens de découvrir Miroir d’Intuition. C’est une expérience simple et intuitive pour mettre des mots sur une période floue et faire apparaître un premier éclairage.. Si tu veux, tu peux faire ton propre miroir ici : https://parlez-moi-de-votre-situation.vercel.app/start",
+      "Je viens de découvrir Miroir d’Intuition. C’est une expérience simple et intuitive pour mettre des mots sur une période floue et faire apparaître un premier éclairage. Si tu veux, tu peux faire ton propre miroir ici : https://parlez-moi-de-votre-situation.vercel.app/start",
     []
   );
 
@@ -85,6 +85,28 @@ export function ShareMirror() {
             LinkedIn
           </a>
         </div>
+
+        {/* ===== SIGNATURE AC ===== */}
+        <div className="mt-10 flex justify-center">
+          <a
+            href="https://arnaudcrestey.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col items-center"
+          >
+            <span className="font-serif text-[34px] leading-none text-mirror-ink sm:text-[40px]">
+              <span className="inline-block -mr-[0.14em]">A</span>
+              <span className="inline-block">C</span>
+            </span>
+
+            <span className="mt-1 text-[14px] text-mirror-muted transition group-hover:text-mirror-ink sm:text-[15px]">
+              arnaudcrestey.com
+            </span>
+
+            <span className="mt-2 h-px w-16 bg-mirror-border transition group-hover:bg-mirror-ink/40" />
+          </a>
+        </div>
+
       </div>
     </section>
   );
